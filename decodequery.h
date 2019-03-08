@@ -473,4 +473,60 @@ static int parseEntity(const char *current,char **to,const char **from) {
 // 	decoded[j] = 0;
 // 	return decoded;
 // }
+size_t decodeHtmlEntities(char *dest,const char *src) {
+	if(!src) src = dest;
+	char *to = dest;
+	const char *from = src;
+	for(const char *current;(current = strchr(from,38));) {//&
+		memmove(to,from,(size_t)(current - from));
+		to += current - from;
+		if(parseEntity(current,&to,&from)) {
+			continue;
+		}
+		from = current;
+		*to++ = *from++;
+	}
+	size_t remaining = strlen(from);
+	memmove(to,from,remaining);
+	to += remaining;
+	*to = 0;
+	return (size_t)(to - dest);
+}
+void decodeUrl(char *destination,const char *source) {
+	char x,y;
+	while(*source) {
+		if((*source == 37) &&//%
+		((x = source[1]) && (y = source[2])) &&
+		(isxdigit(x) && isxdigit(y))) {
+			if(x >= 97) {
+				x -= 32;//97,65
+			}
+			if(x >= 65) {
+				x -= 55;//65
+			}
+			else {
+				x -= 48;
+			}
+			if(y >= 97) {
+				y -= 32;//97,65
+			}
+			if(y >= 65) {
+				y -= 55;//65
+			}
+			else {
+				y -= 48;
+			}
+			*destination++ = 16*x+y;
+			source += 3;
+		}
+		else if(*source == 43) {
+			*destination++ = 32;
+			source++;
+		}
+		else {
+			*destination++ = *source++;
+		}
+	}
+	*destination++ = '\0';
+}
 #endif
