@@ -54,3 +54,7 @@ Also, some of the code has been follow from certain libraries.
 
 So, if you use this complete library, keep the author's name.
 
+In addition, parts of the code have also been optimized.
+If you have any suggestions for improvement or correction, you can submit.
+
+Thank You.
