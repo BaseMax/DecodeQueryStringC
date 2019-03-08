@@ -349,4 +349,36 @@ static size_t putUtf8Char(unsigned long value,char *buffer) {
 	}
 	return 0;
 }
+static int parseEntity(const char *current,char **to,const char **from) {
+	const char *end = strchr(current,59);
+	if(!end) {
+		return 0;
+	}
+	if(current[1] == 35) {
+		char *tail = NULL;
+		int errno_save = errno;
+		int hex = current[2] == 120 || current[2] == 88;
+		errno = 0;
+		unsigned long cp = strtoul(current + (hex ? 3 : 2),&tail,hex ? 16 : 10);
+		int fail = errno ||
+					tail != end ||
+					cp > 0x10FFFFul;
+		errno = errno_save;
+		if(fail) return 0;
+		*to += putUtf8Char(cp,*to);
+		*from = end + 1;
+		return 1;
+	}
+	else {
+		const char *entity = getNamedEntity(&current[1]);
+		if(!entity) {
+			return 0;
+		}
+		size_t len = strlen(entity);
+		memcpy(*to,entity,len);
+		*to += len;
+		*from = end + 1;
+		return 1;
+	}
+}
 #endif
