@@ -24,14 +24,14 @@ static int stringCompare(const void *key,const void *value);
 
 ### Global Variable
 
-```
+```c
 // const char asciiHex[23] = {...};
 static const char *const NamedEntities[][2] = {...};
 ```
 
 ### Includes
 
-```
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
