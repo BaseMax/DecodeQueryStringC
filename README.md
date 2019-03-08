@@ -29,6 +29,16 @@ static int stringCompare(const void *key,const void *value);
 static const char *const NamedEntities[][2] = {...};
 ```
 
+### Includes
+
+```
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include <errno.h>
+```
+
 ## Example I/O
 
 ```
