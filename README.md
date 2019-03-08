@@ -5,19 +5,32 @@ A tiny library for decode query string using c with utf8 support and html entiti
 # Using
 
 ```c
-#include "urldecode.h"
-int main() {
-    char *value=malloc(sizeof(char)*107*2);
-    strcpy(value,"HELLO%2C+%26%231587%3B%26%231604%3B%26%231575%3B%26%231605%3B+%2C+%26%231777%3B%26%231778%3B%26%231779%3B");
-    printf("Input: %s\n",value);
-    decodeUrl(value,value);
-    decodeHtmlEntities(value,value);
-    printf("Output: %s\n",value);
-    return 0;
-}
+decodeUrl(destination,source);
+decodeHtmlEntities(destination,source);
 ```
 
-**I/O :**
+### Functions
+
+```c
+void decodeUrl(char *destination,const char *source);
+size_t decodeHtmlEntities(char *dest,const char *src);
+// char *urlDecode(const char *str);
+// static inline char toUpper(char c);
+static int parseEntity(const char *current,char **to,const char **from);
+static size_t putUtf8Char(unsigned long value,char *buffer);
+static const char *getNamedEntity(const char *name);
+static int stringCompare(const void *key,const void *value);
+```
+
+### Global Variable
+
+```
+// const char asciiHex[23] = {...};
+static const char *const NamedEntities[][2] = {...};
+```
+
+## Example I/O
+
 ```
 Input: HELLO%2C+%26%231587%3B%26%231604%3B%26%231575%3B%26%231605%3B+%2C+%26%231777%3B%26%231778%3B%26%231779%3B
 Output: HELLO, سلام , ۱۲۳
