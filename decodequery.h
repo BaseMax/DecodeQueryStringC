@@ -381,4 +381,96 @@ static int parseEntity(const char *current,char **to,const char **from) {
 		return 1;
 	}
 }
+// 4bit
+// const char asciiHex[23] = {
+// 	0,
+// 	1,
+// 	2,
+// 	3,
+// 	4,
+// 	5,
+// 	6,
+// 	7,
+// 	8,
+// 	9,
+// 	0,
+// 	0,
+// 	0,
+// 	0,
+// 	0,
+// 	0,
+// 	0,
+// 	10,
+// 	11,
+// 	12,
+// 	13,
+// 	14,
+// 	15
+// };
+// static inline char toUpper(char c) {
+// 	if((c >= 97) && (c <= 122)) {//a,z
+// 		return c ^ 0x20;//fast way
+// 	}
+// 	return c;
+// }
+// char *urlDecode(const char *str) {
+// 	size_t i,j,len = strlen(str);
+// 	char c,d,url_hex;
+// 	char *decoded = malloc(len + 1);
+// 	if(decoded == NULL) {
+// 		return NULL;
+// 	}
+// 	i = 0;
+// 	j = 0;
+// 	do {
+// 		c = str[i];
+// 		d = 0;
+// 		if(c == 37) {
+// 			url_hex = toUpper(str[++i]);
+// 			if(
+// 				(
+// 					(url_hex >= 48) &&
+// 					(url_hex <= 57)) ||
+// 					((url_hex >= 65) && (url_hex <= 70))
+// 				) {
+// 				d = asciiHex[url_hex - 48] << 4;
+// 				url_hex = toUpper(str[++i]);
+// 				if(
+// 					(
+// 						(url_hex >= 48) && 
+// 						(url_hex <= 57)
+// 					) || 
+// 					(
+// 						(url_hex >= 65) &&
+// 						(url_hex <= 70)
+// 					)
+// 				) {
+// 					d |= asciiHex[url_hex - 48];
+// 				}
+// 				else {
+// 					d = 0;
+// 				}
+// 			}
+// 		}
+// 		else if(c == 43) {
+// 			d = 32;
+// 		}
+// 		else if(
+// 			(c == 42) ||
+// 			(c == 45) ||
+// 			(c == 46) ||
+// 			((c >= 48) && (c <= 57)) ||
+// 			((c >= 65) && (c <= 90)) ||
+// 			(c == 95) ||
+// 			((c >= 97) && (c <= 122))
+// 		) {
+// 			d = c;
+// 		}
+// 		decoded[j++] = d;
+// 		++i;
+// 	}
+// 	while((i < len) && (d != 0));
+// 	decoded[j] = 0;
+// 	return decoded;
+// }
 #endif
