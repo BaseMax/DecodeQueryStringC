@@ -13,7 +13,7 @@ decodeHtmlEntities(destination,source);
 
 ```c
 void decodeUrl(char *destination,const char *source);
-size_t decodeHtmlEntities(char *dest,const char *src);
+size_t decodeHtmlEntities(char *destination,const char *source);
 // char *urlDecode(const char *str);
 // static inline char toUpper(char c);
 static int parseEntity(const char *current,char **to,const char **from);
