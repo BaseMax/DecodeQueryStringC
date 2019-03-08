@@ -473,10 +473,12 @@ static int parseEntity(const char *current,char **to,const char **from) {
 // 	decoded[j] = 0;
 // 	return decoded;
 // }
-size_t decodeHtmlEntities(char *dest,const char *src) {
-	if(!src) src = dest;
-	char *to = dest;
-	const char *from = src;
+size_t decodeHtmlEntities(char *destination,const char *source) {
+	if(!source) {
+		source = destination;
+	}
+	char *to = destination;
+	const char *from = source;
 	for(const char *current;(current = strchr(from,38));) {//&
 		memmove(to,from,(size_t)(current - from));
 		to += current - from;
@@ -490,7 +492,7 @@ size_t decodeHtmlEntities(char *dest,const char *src) {
 	memmove(to,from,remaining);
 	to += remaining;
 	*to = 0;
-	return (size_t)(to - dest);
+	return (size_t)(to - destination);
 }
 void decodeUrl(char *destination,const char *source) {
 	char x,y;
