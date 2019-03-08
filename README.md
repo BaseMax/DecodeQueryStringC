@@ -1,6 +1,6 @@
 # Decode Query String Using C
 
-A tiny library for decode query string using c with utf8 support and html entities.
+A tiny library for decode value of the query string using c with utf8 support and html entities.
 
 # Using
 
