@@ -271,4 +271,14 @@ static const char *const NamedEntities[][2] = {
 	{ "zwj;","\xE2\x80\x8D" },
 	{ "zwnj;","\xE2\x80\x8C" }
 };
+static int stringCompare(const void *key,const void *value) {
+	return strncmp((const char *)key,*(const char *const *)value,
+		strlen(*(const char *const *)value));
+}
+static const char *getNamedEntity(const char *name) {
+	const char *const *entity = (const char *const *)bsearch(name,
+		NamedEntities,sizeof NamedEntities / sizeof *NamedEntities,
+		sizeof *NamedEntities,stringCompare);
+	return entity ? entity[1] : NULL;
+}
 #endif
