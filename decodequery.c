@@ -8,3 +8,6 @@
 * @Repository : https://github.com/BaseMax/DecodeQueryStringC
 *
 **/
+int main() {
+    return 0;
+}
