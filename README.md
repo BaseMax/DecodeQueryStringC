@@ -9,14 +9,25 @@ A tiny library for decode query string using c with utf8 support and html entiti
 int main() {
     char *value=malloc(sizeof(char)*107*2);
     strcpy(value,"HELLO%2C+%26%231587%3B%26%231604%3B%26%231575%3B%26%231605%3B+%2C+%26%231777%3B%26%231778%3B%26%231779%3B");
+    printf("Input: %s\n",value);
     decodeUrl(value,value);
     decodeHtmlEntities(value,value);
-    printf("---> %s\n",value);
+    printf("Output: %s\n",value);
     return 0;
 }
 ```
 
-**`Output :`**
+**I/O :**
 ```
----> HELLO, سلام , ۱۲۳
+Input: HELLO%2C+%26%231587%3B%26%231604%3B%26%231575%3B%26%231605%3B+%2C+%26%231777%3B%26%231778%3B%26%231779%3B
+Output: HELLO, سلام , ۱۲۳
 ```
+
+## Copyright
+
+Many resources have been used to implement this library. (Eg NamedEntities, ...)
+
+Also, some of the code has been follow from certain libraries.
+
+So, if you use this complete library, keep the author's name.
+
