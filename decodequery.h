@@ -272,13 +272,81 @@ static const char *const NamedEntities[][2] = {
 	{ "zwnj;","\xE2\x80\x8C" }
 };
 static int stringCompare(const void *key,const void *value) {
-	return strncmp((const char *)key,*(const char *const *)value,
-		strlen(*(const char *const *)value));
+	return strncmp(
+				(const char *) key,
+				*(const char *const *) value,
+				strlen(*(const char *const *)value)
+			);
 }
 static const char *getNamedEntity(const char *name) {
-	const char *const *entity = (const char *const *)bsearch(name,
-		NamedEntities,sizeof NamedEntities / sizeof *NamedEntities,
-		sizeof *NamedEntities,stringCompare);
+	const char *const *entity = (const char *const *)
+			bsearch(
+				name,
+				NamedEntities,sizeof NamedEntities / sizeof *NamedEntities,
+				sizeof *NamedEntities,stringCompare
+			);
 	return entity ? entity[1] : NULL;
+}
+static size_t putUtf8Char(unsigned long value,char *buffer) {
+	unsigned char *bytes = (unsigned char *) buffer;
+	if(value <= 0x007Ful) {
+		bytes[0] = (unsigned char) value;
+		return 1;
+	}
+	if(value <= 0x07FFul) {
+		bytes[1] = (unsigned char)
+						(
+							(2 << 6) |
+							(value & 0x3F)
+						);
+		bytes[0] = (unsigned char)
+						(
+							(6 << 5) |
+							(value >> 6)
+						);
+		return 2;
+	}
+	if(value <= 0xFFFFul) {
+		bytes[2] = (unsigned char)
+						(
+							(2 << 6) |
+							(value & 0x3F)
+						);
+		bytes[1] = (unsigned char)
+						(
+							(2 << 6) |
+							((value >> 6) & 0x3F)
+						);
+		bytes[0] = (unsigned char)
+						(
+							(14 << 4) |
+							(value >> 12)
+						);
+		return 3;
+	}
+	if(value <= 0x10FFFFul) {
+		bytes[3] = (unsigned char)
+					(
+						(2 << 6) |
+						(value & 0x3F)
+					);
+		bytes[2] = (unsigned char)
+					(
+						(2 << 6) |
+						((value >>  6) & 0x3F)
+					);
+		bytes[1] = (unsigned char)
+					(
+						(2 << 6) |
+						((value >> 12) & 0x3F)
+					);
+		bytes[0] = (unsigned char)
+					(
+						(30 << 3) |
+						(value >> 18)
+					);
+		return 4;
+	}
+	return 0;
 }
 #endif
