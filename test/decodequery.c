@@ -22,5 +22,6 @@ char *execute(const char *input) {
 }
 int main() {
 	assert(strcmp(execute("a+b"),"a b") == 0);
+	assert(strcmp(execute("a+ b"),"a  b") == 0);
 	return 0;
 }
