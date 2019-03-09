@@ -49,6 +49,17 @@ Input: HELLO%2C+%26%231587%3B%26%231604%3B%26%231575%3B%26%231605%3B+%2C+%26%231
 Output: HELLO, سلام , ۱۲۳
 ```
 
+
+## Compile Example
+
+```
+$ git clone https://github.com/BaseMax/DecodeQueryStringC
+$ cd DecodeQueryStringC/
+$ cd example/
+$ gcc main.c ../source/decodequery.c -o main
+$ ./main
+  ```
+
 ## Copyright
 
 Many resources have been used to implement this library. (Eg NamedEntities, ...)
