@@ -14,6 +14,12 @@
 #include <assert.h>
 #include "../source/decodequery.h"
 
+char *execute(const char *input) {
+	char *temp=malloc(sizeof(char)*200);
+	strcpy(temp,input);
+	decodeUrl(temp,temp);
+	return temp;
+}
 int main() {
 	return 0;
 }
