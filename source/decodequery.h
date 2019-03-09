@@ -8,3 +8,7 @@
 * @Repository : https://github.com/BaseMax/DecodeQueryStringC
 *
 **/
+#ifndef DECODE_QUERY
+#define DECODE_QUERY
+
+#endif
