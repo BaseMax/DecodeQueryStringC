@@ -42,6 +42,9 @@ static const char *const NamedEntities[][2] = {...};
 ## Example I/O
 
 ```
+Input: %D8%B3%D9%84%D8%A7%D9%85
+Output: سلام
+
 Input: HELLO%2C+%26%231587%3B%26%231604%3B%26%231575%3B%26%231605%3B+%2C+%26%231777%3B%26%231778%3B%26%231779%3B
 Output: HELLO, سلام , ۱۲۳
 ```
