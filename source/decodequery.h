@@ -17,4 +17,13 @@
     #include <string.h> //strcpy,strchr,strtoul,strncmp,strlen
     #include <ctype.h>  //isxdigit
 
+    void decodeUrl(char *destination,const char *source);
+	size_t decodeHtmlEntities(char *destination,const char *source);
+	// char *urlDecode(const char *str);
+	// static inline char toUpper(char c);
+	static int parseEntity(const char *current,char **to,const char **from);
+	static size_t putUtf8Char(unsigned long value,char *buffer);
+	static const char *getNamedEntity(const char *name);
+	static int stringCompareLength(const void *key,const void *value);
+
 #endif
