@@ -17,7 +17,7 @@
     #include <string.h> //strcpy,strchr,strtoul,strncmp,strlen
     #include <ctype.h>  //isxdigit
 
-    void decodeUrl(char *destination,const char *source);
+	void decodeUrl(char *destination,const char *source);
 	size_t decodeHtmlEntities(char *destination,const char *source);
 	// char *urlDecode(const char *str);
 	// static inline char toUpper(char c);
