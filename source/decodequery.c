@@ -265,6 +265,7 @@ static const char *const NamedEntities[][2] = {
 	{ "zwj;","\xE2\x80\x8D" },
 	{ "zwnj;","\xE2\x80\x8C" }
 };
+
 static int stringCompare(const void *key,const void *value) {
 	return strncmp(
 				(const char *) key,
@@ -272,6 +273,7 @@ static int stringCompare(const void *key,const void *value) {
 				strlen(*(const char *const *)value)
 			);
 }
+
 static const char *getNamedEntity(const char *name) {
 	const char *const *entity = (const char *const *)
 			bsearch(
@@ -281,6 +283,7 @@ static const char *getNamedEntity(const char *name) {
 			);
 	return entity ? entity[1] : NULL;
 }
+
 static size_t putUtf8Char(unsigned long value,char *buffer) {
 	unsigned char *bytes = (unsigned char *) buffer;
 	if(value <= 0x007Ful) {
@@ -343,6 +346,7 @@ static size_t putUtf8Char(unsigned long value,char *buffer) {
 	}
 	return 0;
 }
+
 static int parseEntity(const char *current,char **to,const char **from) {
 	const char *end = strchr(current,59);
 	if(!end) {
@@ -375,6 +379,7 @@ static int parseEntity(const char *current,char **to,const char **from) {
 		return 1;
 	}
 }
+
 // 4bit
 // const char asciiHex[23] = {
 // 	0,
@@ -401,12 +406,14 @@ static int parseEntity(const char *current,char **to,const char **from) {
 // 	14,
 // 	15
 // };
+
 // static inline char toUpper(char c) {
 // 	if((c >= 97) && (c <= 122)) {//a,z
 // 		return c ^ 0x20;//fast way
 // 	}
 // 	return c;
 // }
+
 // char *urlDecode(const char *str) {
 // 	size_t i,j,len = strlen(str);
 // 	char c,d,url_hex;
@@ -467,6 +474,7 @@ static int parseEntity(const char *current,char **to,const char **from) {
 // 	decoded[j] = 0;
 // 	return decoded;
 // }
+
 size_t decodeHtmlEntities(char *destination,const char *source) {
 	if(!source) {
 		source = destination;
@@ -488,6 +496,7 @@ size_t decodeHtmlEntities(char *destination,const char *source) {
 	*to = 0;
 	return (size_t)(to - destination);
 }
+
 void decodeUrl(char *destination,const char *source) {
 	char x,y;
 	while(*source) {
